@@ -9,12 +9,10 @@ import {
   Users,
 } from "lucide-react";
 import Image from "next/image";
-import {
-  FeatureAssessment,
-  Mockin,
-  Resumebuilder,
-  Selfintro,
-} from "@/assets";
+import SmartSuggest from "@/assets/smart-suggest.png"
+import WatchRoom from "@/assets/watch-room.webp"
+import WatchList from "@/assets/watch-list.webp"
+import MovieBuddies from "@/assets/movie-buddies.webp"
 
 const WhatsInQualifit = () => {
   const [activeFeature, setActiveFeature] = useState("smartSuggest");
@@ -34,7 +32,7 @@ const WhatsInQualifit = () => {
         "Mood-Based Filtering",
         "Real-Time Trending Titles",
       ],
-      imageSrc: FeatureAssessment,
+      imageSrc: SmartSuggest,
       imageAlt: "AI Movie Suggestion",
     },
     {
@@ -48,7 +46,7 @@ const WhatsInQualifit = () => {
         "Release Alerts",
         "Sync Across Devices",
       ],
-      imageSrc: Resumebuilder,
+      imageSrc: WatchList,
       imageAlt: "Smart Watch List",
     },
     {
@@ -62,7 +60,7 @@ const WhatsInQualifit = () => {
         "Real-Time Reactions & Chat",
         "Private and Public Rooms",
       ],
-      imageSrc: Mockin,
+      imageSrc: WatchRoom,
       imageAlt: "Watch Room with Friends",
     },
     {
@@ -76,7 +74,7 @@ const WhatsInQualifit = () => {
         "Share & Discuss Movies",
         "Community Watch Events",
       ],
-      imageSrc: Selfintro,
+      imageSrc: MovieBuddies,
       imageAlt: "Connect with Movie Buddies",
     },
   ];
@@ -100,7 +98,7 @@ const WhatsInQualifit = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text mb-10">
-        <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#b56bbc] to-[#7a71c4]">
+        <p className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#b56bbc] to-[#7a71c4] bg-clip-text  text-transparent">
           Whats in Suggesto?
         </p>
         <h2 className="text-3xl font-bold flex items-center gap-2">

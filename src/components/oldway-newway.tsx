@@ -53,10 +53,10 @@ export default function OldWayNewWay() {
           Why Suggesto?
         </div>
         <h2 className="text-3xl md:text-5xl font-bold leading-tight">
-          Stop Scrolling & Start Watching
+          Discover What to Watch Next
           <br className="hidden sm:block" />
           <span className="mt-2 bg-gradient-to-r from-[#b56bbc] to-[#7a71c4] bg-clip-text text-transparent">
-            with AI-Powered Movie Suggestions
+            with AI Movie Suggestions
           </span>
         </h2>
 
@@ -93,10 +93,10 @@ export default function OldWayNewWay() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-6">
             {[
-              { label: "Decision Time", value: "30+ mins" },
-              { label: "Recommendations", value: "Generic & Random" },
-              { label: "Watch Together", value: "Hard to Sync" },
-              { label: "Experience", value: "Frustrating" },
+              { label: "Decision", value: "30+ mins" },
+              { label: "Picks", value: "Randomized" },
+              { label: "Together", value: "Tough to Sync" },
+              { label: "Feel", value: "Frustrating" },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -105,10 +105,10 @@ export default function OldWayNewWay() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={index}
-                className="text-center md:text-left"
+                className="text-center px-2 py-3"
               >
                 <p className="text-sm text-gray-400 leading-tight">{item.label}</p>
-                <p className="font-bold text-lg leading-tight">{item.value}</p>
+                <p className="font-semibold text-sm sm:text-lg leading-tight">{item.value}</p>
               </motion.div>
             ))}
           </div>
@@ -149,12 +149,12 @@ export default function OldWayNewWay() {
               priority
             />
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-4">
             {[
-              { label: "Decision Time", value: "Under 1 Min" },
-              { label: "Recommendations", value: "AI-Personalized" },
-              { label: "Watch Together", value: "Virtual Rooms" },
-              { label: "Experience", value: "Seamless & Fun" },
+              { label: "Decision", value: "< 1 Min" },
+              { label: "Picks", value: "AI-Powered" },
+              { label: "Together", value: "Watch Rooms" },
+              { label: "Feel", value: "Smooth & Fun" },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -163,15 +163,16 @@ export default function OldWayNewWay() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={index}
-                className="bg-purple-50 p-2 rounded-2xl shadow-sm text-center md:text-left"
+                className="bg-purple-50 px-2 py-3 rounded-xl shadow-sm text-center"
               >
                 <p className="text-sm text-gray-600 leading-tight">{item.label}</p>
-                <p className="font-bold text-lg bg-gradient-to-r from-[#b56bbc] to-[#7a71c4] bg-clip-text text-transparent leading-tight">
+                <p className="font-semibold text-sm sm:text-lg font-semibold bg-gradient-to-r from-[#b56bbc] to-[#7a71c4] bg-clip-text text-transparent leading-tight">
                   {item.value}
                 </p>
               </motion.div>
             ))}
           </div>
+
         </motion.div>
       </div>
 
@@ -186,13 +187,13 @@ export default function OldWayNewWay() {
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <div className="flex flex-col items-center space-y-2 sm:space-y-3 mt-4">
             <Button
-              onClick={() => router.push("/app/register")}
+              onClick={() => router.push("/download")}
               variant="gradient"
               className="flex items-center gap-2 px-8 py-8 text-white text-lg font-semibold rounded-lg transition-colors"
             >
               Try Suggesto Now <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <p className="text-gray-500 text-xs md:text-sm">*No signup hassles. Watch smarter today.</p>
+            <p className="text-gray-500 text-xs md:text-sm">*Watch smarter today.</p>
           </div>
         </motion.div>
       </motion.div>

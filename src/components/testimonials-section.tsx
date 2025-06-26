@@ -131,7 +131,7 @@ export default function TestimonialsSection() {
               </p>
 
               <Button
-                onClick={() => router.push("/app/register")}
+                onClick={() => router.push("/download")}
                 variant="gradient"
                 className="hidden sm:flex items-center gap-2 px-8 py-6 text-white text-lg font-semibold rounded-lg transition-colors"
               >
@@ -207,7 +207,7 @@ export default function TestimonialsSection() {
               {/* Mobile Button */}
               <div className="mt-10 flex justify-center sm:hidden">
                 <Button
-                  onClick={() => router.push("/app/register")}
+                  onClick={() => router.push("/download")}
                   variant="gradient"
                   className="flex items-center gap-2 px-8 py-6 text-white text-lg font-semibold rounded-lg transition-colors"
                 >

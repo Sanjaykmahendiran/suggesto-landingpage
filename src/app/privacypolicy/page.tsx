@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import LandingPageFooter from "@/components/landing-page-footer";
 import { FaGooglePlay } from "react-icons/fa";
+import Header from "@/components/header";
 
 // Simple HTML sanitizer function (you might want to use a library like DOMPurify)
 const sanitizeHTML = (html: string): string => {
@@ -71,30 +72,9 @@ export default function PrivacyPolicy() {
     if (loading) {
         return (
             <div className="min-h-screen">
-                <header className="w-full py-3 md:py-4 px-3 md:px-4 sticky top-0 bg-[#121214] border-b border-[#2b2b2b] z-30">
-                    <div className="container mx-auto flex items-center justify-between">
-                        <Link href="/">
-                            <Image
-                                src={loginlogo}
-                                alt="Suggesto Logo"
-                                width={144}
-                                height={40}
-                                className="object-contain"
-                                priority
-                                draggable={false}
-                            />
-                        </Link>
-                        <div className="flex gap-2">
-                            <Button
-                                onClick={() => router.push("/download")}
-                                className="text-white font-medium rounded-xl px-4 py-2 text-sm shadow-md flex items-center gap-2"
-                            >
-                                <FaGooglePlay className="text-lg" />
-                                Download
-                            </Button>
-                        </div>
-                    </div>
-                </header>
+
+                {/* Header */}
+                <Header />
                 <div className="container mx-auto px-4 py-8">
                     <div className="flex items-center justify-center min-h-[400px]">
                         <div className="text-center">
@@ -112,30 +92,9 @@ export default function PrivacyPolicy() {
     if (error) {
         return (
             <div className="min-h-screen">
-                <header className="w-full py-3 md:py-4 px-3 md:px-4 sticky top-0 bg-[#121214] border-b border-[#2b2b2b] z-30">
-                    <div className="container mx-auto flex items-center justify-between">
-                        <Link href="/">
-                            <Image
-                                src={loginlogo}
-                                alt="Suggesto Logo"
-                                width={144}
-                                height={40}
-                                className="object-contain"
-                                priority
-                                draggable={false}
-                            />
-                        </Link>
-                        <div className="flex gap-2">
-                            <Button
-                                onClick={() => router.push("/download")}
-                                className="text-white font-medium rounded-xl px-4 py-2 text-sm shadow-md flex items-center gap-2"
-                            >
-                                <FaGooglePlay className="text-lg" />
-                                Download
-                            </Button>
-                        </div>
-                    </div>
-                </header>
+
+                {/* Header */}
+                <Header />
                 <div className="container mx-auto px-4 py-8">
                     <div className="text-center py-12">
                         <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
@@ -159,30 +118,9 @@ export default function PrivacyPolicy() {
     if (!privacy) {
         return (
             <div className="min-h-screen">
-                <header className="w-full py-3 md:py-4 px-3 md:px-4 sticky top-0 bg-[#121214] border-b border-[#2b2b2b] z-30">
-                    <div className="container mx-auto flex items-center justify-between">
-                        <Link href="/">
-                            <Image
-                                src={loginlogo}
-                                alt="Suggesto Logo"
-                                width={144}
-                                height={40}
-                                className="object-contain"
-                                priority
-                                draggable={false}
-                            />
-                        </Link>
-                        <div className="flex gap-2">
-                            <Button
-                                onClick={() => router.push("/download")}
-                                className="text-white font-medium rounded-xl px-4 py-2 text-sm shadow-md flex items-center gap-2"
-                            >
-                                <FaGooglePlay className="text-lg" />
-                                Download
-                            </Button>
-                        </div>
-                    </div>
-                </header>
+
+                {/* Header */}
+                <Header />
                 <div className="container mx-auto px-4 py-8">
                     <div className="text-center py-12">
                         <h2 className="text-2xl font-semibold text-gray-800 mb-2">Privacy Policy Not Available</h2>
@@ -197,30 +135,9 @@ export default function PrivacyPolicy() {
     // Success state
     return (
         <div className="min-h-screen">
-            <header className="w-full py-3 md:py-4 px-3 md:px-4 sticky top-0 bg-[#121214] border-b border-[#2b2b2b] z-30">
-                <div className="container mx-auto flex items-center justify-between">
-                    <Link href="/">
-                        <Image
-                            src={loginlogo}
-                            alt="Suggesto Logo"
-                            width={144}
-                            height={40}
-                            className="object-contain"
-                            priority
-                            draggable={false}
-                        />
-                    </Link>
-                    <div className="flex gap-2">
-                        <Button
-                            onClick={() => router.push("/download")}
-                            className="text-white font-medium rounded-xl px-4 py-2 text-sm shadow-md flex items-center gap-2"
-                        >
-                            <FaGooglePlay className="text-lg" />
-                            Download
-                        </Button>
-                    </div>
-                </div>
-            </header>
+
+            {/* Header */}
+            <Header />
             <div className="container mx-auto px-4 py-8">
                 <main className="prose prose-gray max-w-none dark:prose-invert">
                     <h1 className="text-4xl font-bold text-center tracking-tight">Privacy Policy</h1>

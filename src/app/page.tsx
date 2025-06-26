@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState, useRef } from "react"
 import dynamic from "next/dynamic"
 import { ChevronUp } from "lucide-react"
-import Link from "next/link"
+
 
 const LandingPageHeader = dynamic(() => import("@/components/landing-header-section"), { ssr: false })
 const SocialProofSection = dynamic(() => import("@/components/social-proof-section"), { ssr: false })
@@ -11,11 +11,11 @@ const WordsOnQualifit = dynamic(() => import("@/components/words-on-suggesto"), 
 const OldWayNewWay = dynamic(() => import("@/components/oldway-newway"), { ssr: false })
 const TestimonialsSection = dynamic(() => import("@/components/testimonials-section"), { ssr: false })
 const FAQSection = dynamic(() => import("@/components/faq-section"), { ssr: false })
-const WhatsInQualifit = dynamic(() => import("@/components/whats-in-suggesto"), { ssr: false })
-const JoinUsSection = dynamic(() => import("@/components/joinus-section"), { ssr: false })
+const WorkflowSection = dynamic(() => import("@/components/workflow"), { ssr: false })
+const FeaturesSection = dynamic(() => import("@/components/features-section"), { ssr: false })
 const LandingPageFooter = dynamic(() => import("@/components/landing-page-footer"), { ssr: false })
 const EbookPromoSection = dynamic(() => import("@/components/SuggestoPromoSection"), { ssr: false })
-const ROISection = dynamic(() => import("@/components/SuggestoImpactSection"), { ssr: false })
+const CreateBetterSetion = dynamic(() => import("@/components/create-better"), { ssr: false })
 const FloatingChat = dynamic(() => import("@/components/floating-chat"), { ssr: false })
 
 const LandingPage = () => {
@@ -65,22 +65,21 @@ const LandingPage = () => {
       <LandingPageHeader />
       <SocialProofSection />
       <OldWayNewWay />
-      <WhatsInQualifit />
-      <TestimonialsSection />
+      {/* <WhatsInQualifit /> */}
+
       {/* {!isMobile ? <WhyQualifitSection /> : '' } */}
-      <WordsOnQualifit />
-      {/* <FeaturesSection /> */}
+      {/* <WordsOnQualifit /> */}
+      <FeaturesSection />
+      <CreateBetterSetion />
       {/* <BlogSection /> */}
       <EbookPromoSection />
-      <ROISection />
+      {/* <ROISection /> */}
+      <WorkflowSection />
+      <TestimonialsSection />
       <FAQSection />
-      <JoinUsSection />
+      {/* <JoinUsSection /> */}
       <LandingPageFooter />
       <FloatingChat />
-      {isMobile ?
-        <div className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-[#b56bbc] to-[#7a71c4] text-white text-center py-4 font-semibold text-sm shadow-md  z-50">
-          <Link href="/app/register">Validate Resume - It&apos;s Free!</Link>
-        </div> : ''}
 
       {showScrollToTop && (
         <button

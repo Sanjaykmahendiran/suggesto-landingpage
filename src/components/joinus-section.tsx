@@ -36,7 +36,7 @@ export default function JoinUsSection() {
             <div className="space-y-4 sm:space-y-5">
               <Button
                 onClick={() => {
-                  router.push("/app/register");
+                  router.push("/download");
                 }}
                 variant="gradient"
                 className="mx-auto md:mx-0 flex items-center gap-2 px-8 py-8 text-white text-lg font-semibold rounded-lg transition-colors"

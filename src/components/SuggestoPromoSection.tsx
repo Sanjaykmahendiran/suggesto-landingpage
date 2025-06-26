@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import PromoImg from "@/assets/login-below/ebook-cover.webp"
 import Link from "next/link";
+import playstore from "@/assets/playstore.png";
+import appleicon from "@/assets/apple-icon.png";
+import { useRouter } from "next/navigation";
 
 const benefits = [
   "AI picks based on your mood and taste",
@@ -13,6 +16,7 @@ const benefits = [
 ];
 
 export default function SuggestoPromoSection() {
+  const router = useRouter();
   return (
     <div className="w-full bg-gradient-to-r from-[#b56bbc]/20 to-[#7a71c4] text-white overflow-hidden" id="promo-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12 flex flex-col-reverse md:flex-row items-center justify-center text-center md:text-left gap-10 md:gap-12">
@@ -47,11 +51,42 @@ export default function SuggestoPromoSection() {
               ))}
             </div>
 
-            <Link href="/app/register" passHref>
-              <Button className="mt-6 text-white border-2 border-white rounded-md px-6 py-4 sm:px-8 sm:py-6 text-base sm:text-lg flex items-center gap-2 transition-colors duration-300">
-                Join & Get Started Free
-                <ArrowRight className="h-4 w-4 ml-1" />
-              </Button>
+            <Link href="/download" passHref>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-end">
+                {/* Google Play */}
+                <button
+                  onClick={() => router.push("/download")}
+                  className="bg-white/10 hover:bg-white/20 transition-colors border border-white/20 h-14 px-6 rounded-lg"
+                  aria-label="Download from Google Play"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 relative">
+                      <Image src={playstore} alt="Play Store" fill className="object-contain" />
+                    </div>
+                    <div className="text-left leading-tight">
+                      <div className="text-xs text-white/80">GET IT ON</div>
+                      <div className="text-sm font-semibold text-white">Google Play</div>
+                    </div>
+                  </div>
+                </button>
+
+                {/* App Store */}
+                <button
+                  onClick={() => router.push("/download")}
+                  className="bg-white/10 hover:bg-white/20 transition-colors border border-white/20 h-14 px-6 rounded-lg"
+                  aria-label="Download from App Store"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 relative">
+                      <Image src={appleicon} alt="App Store" fill className="object-contain" />
+                    </div>
+                    <div className="text-left leading-tight">
+                      <div className="text-xs text-white/80">Download on the</div>
+                      <div className="text-sm font-semibold text-white">App Store</div>
+                    </div>
+                  </div>
+                </button>
+              </div>
             </Link>
           </div>
         </motion.div>
