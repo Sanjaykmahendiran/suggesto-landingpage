@@ -1,103 +1,98 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import React, { useCallback, useEffect, useState, useRef } from "react"
+import dynamic from "next/dynamic"
+import { ChevronUp } from "lucide-react"
+import Link from "next/link"
+
+const LandingPageHeader = dynamic(() => import("@/components/landing-header-section"), { ssr: false })
+const SocialProofSection = dynamic(() => import("@/components/social-proof-section"), { ssr: false })
+const WordsOnQualifit = dynamic(() => import("@/components/words-on-suggesto"), { ssr: false })
+const OldWayNewWay = dynamic(() => import("@/components/oldway-newway"), { ssr: false })
+const TestimonialsSection = dynamic(() => import("@/components/testimonials-section"), { ssr: false })
+const FAQSection = dynamic(() => import("@/components/faq-section"), { ssr: false })
+const WhatsInQualifit = dynamic(() => import("@/components/whats-in-suggesto"), { ssr: false })
+const JoinUsSection = dynamic(() => import("@/components/joinus-section"), { ssr: false })
+const LandingPageFooter = dynamic(() => import("@/components/landing-page-footer"), { ssr: false })
+const EbookPromoSection = dynamic(() => import("@/components/SuggestoPromoSection"), { ssr: false })
+const ROISection = dynamic(() => import("@/components/SuggestoImpactSection"), { ssr: false })
+const FloatingChat = dynamic(() => import("@/components/floating-chat"), { ssr: false })
+
+const LandingPage = () => {
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [showNewsletter, setShowNewsletter] = useState(false);
+  const [hasShownNewsletter, setHasShownNewsletter] = useState(false);
+  const lastScrollTime = useRef(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }
+
+  const handleScroll = useCallback(() => {
+    const now = Date.now()
+    if (now - lastScrollTime.current < 100) return
+    lastScrollTime.current = now
+
+    setShowScrollToTop(window.scrollY > window.innerHeight)
+
+    const section = document.getElementById("ebook-section")
+    if (section) {
+      const sectionTop = section.getBoundingClientRect().top
+      if (sectionTop <= window.innerHeight / 2 && !hasShownNewsletter) {
+        setShowNewsletter(true)
+        setHasShownNewsletter(true)
+      }
+    }
+  }, [hasShownNewsletter])
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [handleScroll])
+
+  useEffect(() => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    setIsMobile(isMobile);
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="relative">
+      <LandingPageHeader />
+      <SocialProofSection />
+      <OldWayNewWay />
+      <WhatsInQualifit />
+      <TestimonialsSection />
+      {/* {!isMobile ? <WhyQualifitSection /> : '' } */}
+      <WordsOnQualifit />
+      {/* <FeaturesSection /> */}
+      {/* <BlogSection /> */}
+      <EbookPromoSection />
+      <ROISection />
+      <FAQSection />
+      <JoinUsSection />
+      <LandingPageFooter />
+      <FloatingChat />
+      {isMobile ?
+        <div className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-[#b56bbc] to-[#7a71c4] text-white text-center py-4 font-semibold text-sm shadow-md  z-50">
+          <Link href="/app/register">Validate Resume - It&apos;s Free!</Link>
+        </div> : ''}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      {showScrollToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-14 right-4 bg-white text-black p-2 rounded-full shadow-lg transition-opacity duration-300 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+          aria-label="Scroll to top"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <ChevronUp className="w-6 h-6" />
+        </button>
+      )}
     </div>
-  );
+  )
 }
+
+export default LandingPage;
