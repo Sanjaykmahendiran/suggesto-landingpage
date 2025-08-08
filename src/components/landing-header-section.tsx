@@ -1,6 +1,6 @@
 "use client";
 
-import { Play } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -20,7 +20,6 @@ const words = [
   "Quick Picks",
 ];
 
-
 export default function LandingPageHeader() {
   const router = useRouter();
   const [text, setText] = useState("");
@@ -33,6 +32,7 @@ export default function LandingPageHeader() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
+  const [showControls, setShowControls] = useState(true);
 
   useEffect(() => {
     const currentWord = words[wordIndex];
@@ -81,78 +81,69 @@ export default function LandingPageHeader() {
     return () => observer.disconnect();
   }, []);
 
-  const togglePlay = () => {
+  // Enhanced play/pause functionality
+  const togglePlay = async () => {
     if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-        setIsPlaying(true);
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
+      try {
+        if (videoRef.current.paused) {
+          await videoRef.current.play();
+          setIsPlaying(true);
+        } else {
+          videoRef.current.pause();
+          setIsPlaying(false);
+        }
+      } catch (error) {
+        console.error('Error toggling video playback:', error);
       }
+    }
+  };
+
+  // Handle video events
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleEnded = () => setIsPlaying(false);
+
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+    video.addEventListener('ended', handleEnded);
+
+    return () => {
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+      video.removeEventListener('ended', handleEnded);
+    };
+  }, [isInView]);
+
+  // Handle mouse enter/leave for control visibility
+  const handleMouseEnter = () => setShowControls(true);
+  const handleMouseLeave = () => {
+    if (isPlaying) {
+      setShowControls(false);
     }
   };
 
   return (
     <main className="flex flex-col min-h-screen items-center overflow-x-hidden">
-      {/* Banner */}
-      {/* {showBanner && (
-        <div className="relative w-full bg-gradient-to-r from-[#b56bbc] to-[#7a71c4] text-white py-3 px-4 overflow-hidden">
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            <div
-              className="absolute inset-0 w-full bg-white/10 blur-sm animate-slide transform skew-x-12"
-              style={{
-                animation: "slide 6s linear infinite",
-                willChange: "transform"
-              }}
-            />
-          </div>
-
-          <div className="relative z-10 container mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 text-center sm:text-left">
-            <div className="flex items-center gap-2 text-sm sm:text-base">
-              <TicketPercent className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span className="break-words">
-                <strong>50% OFF:</strong> Lifetime access to Suggesto Premium!
-              </span>
-            </div>
-
-
-            <Link
-              href="/download"
-              className="flex items-center gap-1 font-medium hover:underline text-white flex-shrink-0"
-            >
-              <CircleArrowRight className="w-5 h-5" />
-            </Link>
-
-            <button
-              onClick={() => setShowBanner(false)}
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition flex-shrink-0"
-              aria-label="Close banner"
-            >
-              <X className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
-          </div>
-        </div>
-      )} */}
-
-
-
       {/* Hero */}
       <div className="relative w-full flex flex-col items-center overflow-hidden">
         <div
           style={{
             backgroundImage: `url(${bgbanner.src})`,
           }}
-          className="absolute top-0 left-0 w-full h-[90%] md:h-[80%] bg-[#121214] z-0 pointer-events-none bg-cover bg-center bg-no-repeat" />
-        <div className="absolute inset-0 bg-[#121214]/40 z-0" />
-        <header className="w-full sticky top-0 z-30  px-4 py-3 overflow-hidden">
+          className="absolute top-0 left-0 w-full h-[90%] md:h-[80%] z-0 pointer-events-none bg-cover bg-center bg-no-repeat " />
+        <div className="absolute inset-0 z-0" />
+        <header className="w-full sticky top-0 z-30 px-4 py-3 overflow-hidden">
           <div className="container mx-auto flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center flex-shrink-0 min-w-0">
               <Image
                 src={loginlogo}
                 alt="Suggesto Logo"
-                className="object-contain h-8 w-auto max-w-full"
+                className="object-contain h-12 w-auto max-w-full"
                 priority
                 draggable={false}
               />
@@ -234,33 +225,46 @@ export default function LandingPageHeader() {
             </div>
           </div>
 
-          {/* Lazy-Loaded Video */}
+          {/* Enhanced Video with Better Controls */}
           <div className="w-full max-w-6xl mx-auto mt-12 sm:mt-16">
             <div className="flex items-center justify-center w-full rounded-3xl overflow-hidden select-none">
               <div
                 ref={videoContainerRef}
-                className="relative w-full cursor-pointer flex items-center justify-center overflow-hidden aspect-video bg-black/20 rounded-3xl"
+                className="relative w-full group cursor-pointer flex items-center justify-center overflow-hidden aspect-video rounded-3xl"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onClick={togglePlay}
               >
                 {isInView ? (
                   <>
                     <video
                       ref={videoRef}
                       className="w-full h-full object-cover rounded-3xl"
-                      poster="https://www.qualifitai.com/assets/video_intro.webp"
-                      controls={!isPlaying}
+                      poster="https://suggesto.top/uploads/thumbnail.webp"
                       playsInline
                       preload="metadata"
-                      src="https://www.qualifitai.com/assets/qualifit_intro.mp4"
+                      src="https://suggesto.top/uploads/video.mp4"
+                    // Remove the controls attribute to have custom controls
                     />
 
-                    {!isPlaying && (
+                    {/* Custom Play/Pause Button Overlay */}
+                    <div className={`absolute inset-0 flex bg-black/50 items-center justify-center transition-all duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'
+                      }`}>
                       <button
-                        onClick={togglePlay}
-                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-25 hover:bg-opacity-40 transition duration-200 rounded-3xl"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          togglePlay();
+                        }}
+                        className="bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-4 transition-all duration-200 transform hover:scale-110"
+                        aria-label={isPlaying ? "Pause video" : "Play video"}
                       >
-                        <Play className="w-12 h-12 text-white" />
+                        {isPlaying ? (
+                          <Pause className="w-8 h-8 text-white" />
+                        ) : (
+                          <Play className="w-8 h-8 text-white ml-1" />
+                        )}
                       </button>
-                    )}
+                    </div>
                   </>
                 ) : (
                   <div className="w-full aspect-video bg-black/10 animate-pulse rounded-3xl" />

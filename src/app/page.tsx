@@ -14,7 +14,7 @@ const FAQSection = dynamic(() => import("@/components/faq-section"), { ssr: fals
 const WorkflowSection = dynamic(() => import("@/components/workflow"), { ssr: false })
 const FeaturesSection = dynamic(() => import("@/components/features-section"), { ssr: false })
 const LandingPageFooter = dynamic(() => import("@/components/landing-page-footer"), { ssr: false })
-const EbookPromoSection = dynamic(() => import("@/components/SuggestoPromoSection"), { ssr: false })
+const SuggestoPromoSection = dynamic(() => import("@/components/SuggestoPromoSection"), { ssr: false })
 const CreateBetterSetion = dynamic(() => import("@/components/create-better"), { ssr: false })
 const FloatingChat = dynamic(() => import("@/components/floating-chat"), { ssr: false })
 
@@ -61,7 +61,7 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="relative">
+<div className="relative min-h-screen">
       <LandingPageHeader />
       <SocialProofSection />
       <OldWayNewWay />
@@ -70,9 +70,9 @@ const LandingPage = () => {
       {/* {!isMobile ? <WhyQualifitSection /> : '' } */}
       {/* <WordsOnQualifit /> */}
       <FeaturesSection />
-      <CreateBetterSetion />
+      {/* <CreateBetterSetion /> */}
       {/* <BlogSection /> */}
-      <EbookPromoSection />
+      <SuggestoPromoSection />
       {/* <ROISection /> */}
       <WorkflowSection />
       <TestimonialsSection />

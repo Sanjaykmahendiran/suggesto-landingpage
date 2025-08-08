@@ -11,7 +11,6 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { X, Loader } from "lucide-react";
-// import { chatSubmit } from "@/services/chatCardService";
 import { Input } from "@/components/ui/input";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -44,32 +43,45 @@ const LoginChatCard: React.FC<LoginChatCardProps> = ({ onClose }) => {
     const handleSubmit = async () => {
         if (isSubmitting) return;
 
+        const { email, category, query } = formState;
+
         try {
             setIsSubmitting(true);
 
-            // const payload = {
-            //     gofor: "needhelp",
-            //     category: formState.category,
-            //     description: formState.query,
-            //     name: "",
-            //     email: formState.email,
-            //     mobileno: "",
-            // };
-
-            toast.success("Enquiry submitted successfully.\nWe will get back in 24 hours.", {
-                duration: 5000,
-                style: { whiteSpace: "pre-line" },
+            const response = await fetch("https://suggesto.xyz/App/api.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    gofor: "needhelp",
+                    email,
+                    category,
+                    query,
+                }),
             });
 
-            onClose();
+            const result = await response.json();
 
-            // await chatSubmit(payload);
+            if (response.ok && result?.status !== "error") {
+                toast.success(
+                    "Enquiry submitted successfully.\nWe will get back in 24 hours.",
+                    {
+                        duration: 5000,
+                        style: { whiteSpace: "pre-line" },
+                    }
+                );
+                onClose();
+            } else {
+                toast.error("Failed to submit enquiry. Please try again.");
+            }
         } catch (error) {
-            toast.error("Failed to submit enquiry");
+            toast.error("An error occurred. Please try again.");
         } finally {
             setIsSubmitting(false);
         }
     };
+
 
     return (
         <>

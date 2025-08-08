@@ -1,24 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { Sparkles, Heart, Brain, Clapperboard, Star, BrainCircuit } from "lucide-react";
 import loginlogo from "@/assets/suggesto-name-logo.png";
-import phoneMockup from "@/assets/phone-mockup.png";
+import phoneMockup from "@/assets/phone-mockup-download.png";
 import playstore from "@/assets/playstore.png";
 import appleicon from "@/assets/apple-icon.png";
 
 declare const gtag: (...args: any[]) => void | undefined;
 
 export default function Download() {
-
-    // Function to handle Google Play Store redirect
     const handleGooglePlayDownload = () => {
-        // Replace with your actual Google Play Store URL
         const playStoreUrl = "https://play.google.com/store/apps/details?id=com.techades.suggesto";
-
-        // Open in new tab
         window.open(playStoreUrl, '_blank', 'noopener,noreferrer');
-
-        // Optional: Track analytics event
         if (typeof gtag !== 'undefined') {
             gtag('event', 'click', {
                 event_category: 'App Download',
@@ -28,15 +22,9 @@ export default function Download() {
         }
     };
 
-    // Function to handle App Store redirect
     const handleAppStoreDownload = () => {
-        // Replace with your actual App Store URL
         const appStoreUrl = "https://apps.apple.com/app/suggesto/id1234567890";
-
-        // Open in new tab
         window.open(appStoreUrl, '_blank', 'noopener,noreferrer');
-
-        // Optional: Track analytics event
         if (typeof gtag !== 'undefined') {
             gtag('event', 'click', {
                 event_category: 'App Download',
@@ -46,15 +34,13 @@ export default function Download() {
         }
     };
 
-
     return (
         <div className="min-h-screen relative overflow-hidden">
             {/* Main content */}
             <div className="container mx-auto px-6 py-16">
-                <div className="grid lg:grid-cols-2 gap- items-center max-w-7xl mx-auto">
+                <div className="grid lg:grid-cols-2 items-center max-w-7xl mx-auto">
                     {/* Left content */}
                     <div className="space-y-8">
-                        {/* Add logo here */}
                         <div>
                             <Image
                                 src={loginlogo}
@@ -77,9 +63,7 @@ export default function Download() {
                         </div>
 
                         <div className="flex flex-col items-start mt-8 gap-6">
-                            {/* App store buttons */}
                             <div className="flex flex-col sm:flex-row gap-4">
-                                {/* Google Play Button */}
                                 <button
                                     onClick={handleGooglePlayDownload}
                                     className="bg-white/10 hover:bg-white/20 transition-colors border border-white/20 h-14 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
@@ -101,7 +85,6 @@ export default function Download() {
                                     </div>
                                 </button>
 
-                                {/* App Store Button */}
                                 <button
                                     onClick={handleAppStoreDownload}
                                     className="bg-white/10 hover:bg-white/20 transition-colors border border-white/20 h-14 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
@@ -126,21 +109,29 @@ export default function Download() {
                         </div>
                     </div>
 
-                    {/* Right content - Phone mockup */}
+
+                    {/* Right content - Phone mockup with splash effects */}
                     <div className="relative flex justify-center lg:justify-end">
-                        {/* Phone image instead of mockup */}
                         <div className="relative w-full h-[520px] bounce-slow">
+                            {/* Phone mockup image */}
                             <Image
                                 src={phoneMockup}
                                 alt="Phone Mockup"
                                 fill
-                                className="object-contain shadow-2xl"
+                                className="object-contain"
                                 priority
                             />
+
+                            {/* Splash effects */}
+                            <div className="absolute top-6 left-8 w-16 h-16 bg-pink-500/30 blur-2xl rounded-full animate-float" />
+                            <div className="absolute top-20 right-10 w-12 h-12 bg-yellow-400/30 blur-xl rounded-full animate-pulse" />
+                            <div className="absolute bottom-8 left-14 w-20 h-20 bg-blue-400/30 blur-3xl rounded-full animate-float-slow" />
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
-    )
+    );
 }

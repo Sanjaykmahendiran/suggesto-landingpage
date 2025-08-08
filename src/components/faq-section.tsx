@@ -59,12 +59,22 @@ const FAQItem = ({
   onClick: () => void
 }) => {
   return (
-    <div className={`rounded-2xl transition-all duration-300 ${isOpen ? "bg-[#2b2b2b]" : "bg-[#2b2b2b]"}`}>
+    <div
+      className={`rounded-2xl transition-all duration-300 ${isOpen ? "bg-[#2b2b2b]" : "bg-[#2b2b2b]"
+        }`}
+    >
       <div
         className="flex items-center justify-between px-6 py-8 cursor-pointer"
         onClick={onClick}
       >
-        <h3 className="text-base md:text-lg font-bold">{question}</h3>
+        <h3
+          className={`text-base md:text-lg font-bold ${isOpen
+              ? "bg-gradient-to-r from-[#b56bbc] to-[#7a71c4] bg-clip-text text-transparent"
+              : "text-white"
+            }`}
+        >
+          {question}
+        </h3>
         <div className="ml-4">
           {isOpen ? (
             <ArrowUpIcon className="w-5 h-5 text-primary transition-transform rotate-180" />
@@ -83,13 +93,14 @@ const FAQItem = ({
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="px-6 pb-6 text-sm text-gray-400">{answer}</div>
+            <div className="px-6 pb-6 text-sm text-white">{answer}</div>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
   )
 }
+
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number>(0)

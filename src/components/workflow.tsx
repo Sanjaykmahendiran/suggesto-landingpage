@@ -5,29 +5,33 @@ import workflow2 from "@/assets/step2.png";
 import workflow3 from "@/assets/step3.png";
 
 const WorkflowSection = () => {
-    const steps = [
-        {
-            stepNumber: "01",
-            title: "Install Suggesto App",
-            description: "Download Suggesto on iOS, Android, or access it via web to start discovering movies instantly.",
-            image: workflow1,
-            alt: "Suggesto app download"
-        },
-        {
-            stepNumber: "02",
-            title: "Set Your Preferences",
-            description: "Choose your favorite genres, languages, and streaming platforms to personalize your experience.",
-            image: workflow2,
-            alt: "Preference setup"
-        },
-        {
-            stepNumber: "03",
-            title: "Discover & Watch Together",
-            description: "Get AI-powered movie suggestions, build your watchlist, and enjoy watch parties with friends.",
-            image: workflow3,
-            alt: "Movie suggestions and watch together"
-        }
-    ];
+const steps = [
+    {
+        stepNumber: "01",
+        title: "Install Suggesto App",
+        description:
+            "Download the Suggesto app on iOS, Android, or use it directly on the web. Whether you're on your phone, tablet, or desktop, Suggesto makes it effortless to start discovering movies tailored to your taste — anytime, anywhere.",
+        image: workflow1,
+        alt: "Suggesto app download"
+    },
+    {
+        stepNumber: "02",
+        title: "Set Your Preferences",
+        description:
+            "Quickly personalize your experience by selecting your favorite movie genres, preferred languages, and streaming platforms you already subscribe to. Suggesto uses this information to deliver recommendations that truly match your mood and interests.",
+        image: workflow2,
+        alt: "Preference setup"
+    },
+    {
+        stepNumber: "03",
+        title: "Discover & Watch Together",
+        description:
+            "Unlock AI-powered suggestions curated just for you. Easily build a dynamic watchlist, explore trending titles, and invite friends to join interactive watch parties. Whether it's a solo night or a group binge session, Suggesto brings everyone together.",
+        image: workflow3,
+        alt: "Movie suggestions and watch together"
+    }
+];
+
 
 
     return (
@@ -45,7 +49,7 @@ const WorkflowSection = () => {
 
 
                 {/* Steps Container */}
-                <div className="relative space-y-32 mt-10">
+                <div className="relative  mt-10">
                     {steps.map((step, index) => (
                         <div
                             key={index}
@@ -53,7 +57,7 @@ const WorkflowSection = () => {
                             style={{ zIndex: index + 1 }}
                         >
                             <div
-                                className={`relative rounded-2xl overflow-visible bg-[#2b2b2b] border border-gray-700/50 p-8 md:p-12 w-full max-w-5xl mx-auto ${index === 1 ? 'md:flex-row-reverse' : ''
+                                className={`relative rounded-2xl overflow-visible mt-10 bg-[#2b2b2b] border border-gray-700/50 p-8 md:p-12 w-full max-w-5xl mx-auto ${index === 1 ? 'md:flex-row-reverse' : ''
                                     }`}
                             >
                                 <div className="flex flex-col md:flex-row items-center gap-8">
